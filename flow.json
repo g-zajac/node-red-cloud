@@ -26,11 +26,11 @@
         "onceDelay": 0.1,
         "topic": "",
         "payloadType": "date",
-        "x": 240,
+        "x": 170,
         "y": 100,
         "wires": [
             [
-                "54a6cd00cf86a36c"
+                "b9761a07dd185134"
             ]
         ]
     },
@@ -39,15 +39,70 @@
         "type": "debug",
         "z": "756b2f50c17bf1f1",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 450,
+        "x": 590,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "b9761a07dd185134",
+        "type": "dwdweather",
+        "z": "756b2f50c17bf1f1",
+        "name": "Berlin-Alex",
+        "mosmixStation": "10389",
+        "lookAheadHours": "12",
+        "additionalFields": "",
+        "repeat": "0",
+        "topic": "",
+        "x": 370,
         "y": 100,
+        "wires": [
+            [
+                "c012de64ff42b43f",
+                "54a6cd00cf86a36c"
+            ]
+        ]
+    },
+    {
+        "id": "c012de64ff42b43f",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "func": "msg.payload = msg.payload.tempc;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 60,
+        "wires": [
+            [
+                "43e90105bf59c5a8"
+            ]
+        ]
+    },
+    {
+        "id": "43e90105bf59c5a8",
+        "type": "debug",
+        "z": "756b2f50c17bf1f1",
+        "name": "Temperature",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 780,
+        "y": 60,
         "wires": []
     }
 ]
