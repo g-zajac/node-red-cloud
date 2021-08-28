@@ -2,7 +2,10 @@
     "name": "node-red-cloud",
     "description": "My node red on AWS",
     "version": "0.0.1",
-    "dependencies": {},
+    "dependencies": {
+        "node-red-contrib-dwd-local-weather": "1.0.1",
+        "node-red-dashboard": "2.30.0"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flow.json",

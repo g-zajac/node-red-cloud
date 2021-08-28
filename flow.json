@@ -7,6 +7,49 @@
         "info": ""
     },
     {
+        "id": "35f1851ce9c8b0b7",
+        "type": "tls-config",
+        "name": "AWS-certificates",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "aaf44340a1-certificate.pem.crt",
+        "keyname": "aaf44340a1f030806aebc82f7b9a52f191599230afde2251f0932e82b0f5d20f-private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "37a6f38f31e18bdc",
+        "type": "mqtt-broker",
+        "name": "AWS",
+        "broker": "azajijbaqf61a-ats.iot.eu-central-1.amazonaws.com",
+        "port": "8883",
+        "tls": "35f1851ce9c8b0b7",
+        "clientid": "",
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
         "id": "386e39e445533e8d",
         "type": "inject",
         "z": "756b2f50c17bf1f1",
@@ -20,7 +63,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "5",
+        "repeat": "60",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
@@ -39,7 +82,7 @@
         "type": "debug",
         "z": "756b2f50c17bf1f1",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -47,7 +90,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 590,
-        "y": 160,
+        "y": 140,
         "wires": []
     },
     {
@@ -65,7 +108,8 @@
         "wires": [
             [
                 "c012de64ff42b43f",
-                "54a6cd00cf86a36c"
+                "54a6cd00cf86a36c",
+                "006b5b114ccf9b74"
             ]
         ]
     },
@@ -103,6 +147,24 @@
         "statusType": "auto",
         "x": 780,
         "y": 60,
+        "wires": []
+    },
+    {
+        "id": "006b5b114ccf9b74",
+        "type": "mqtt out",
+        "z": "756b2f50c17bf1f1",
+        "name": "to dynamoDB",
+        "topic": "berlin/alex/temperature",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "37a6f38f31e18bdc",
+        "x": 600,
+        "y": 220,
         "wires": []
     }
 ]
