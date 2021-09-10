@@ -52,8 +52,8 @@
     {
         "id": "82467892e58e1771",
         "type": "ui_tab",
-        "name": "weather",
-        "icon": "weather",
+        "name": "Arnold",
+        "icon": "home",
         "disabled": false,
         "hidden": false
     },
@@ -61,18 +61,20 @@
         "id": "4eed6d9cca178cac",
         "type": "ui_base",
         "theme": {
-            "name": "theme-light",
+            "name": "theme-dark",
             "lightTheme": {
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
+                "edited": true,
+                "reset": false
             },
             "darkTheme": {
                 "default": "#097479",
                 "baseColor": "#097479",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
+                "edited": true,
+                "reset": false
             },
             "customTheme": {
                 "name": "Untitled Theme 1",
@@ -82,44 +84,44 @@
             },
             "themeState": {
                 "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
+                    "default": "#097479",
+                    "value": "#097479",
                     "edited": false
                 },
                 "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
+                    "value": "#097479",
                     "edited": false
                 },
                 "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
                     "value": "#111111",
                     "edited": false
                 },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
                 "widget-backgroundColor": {
-                    "value": "#0094ce",
+                    "value": "#097479",
                     "edited": false
                 },
                 "widget-borderColor": {
-                    "value": "#ffffff",
+                    "value": "#333333",
                     "edited": false
                 },
                 "base-font": {
@@ -160,8 +162,16 @@
         "tab": "82467892e58e1771",
         "order": 1,
         "disp": true,
-        "width": "6",
+        "width": 20,
         "collapse": false
+    },
+    {
+        "id": "4e394c0747a6bf8f",
+        "type": "mikrotik-device",
+        "host": "b88d0ab1c4ef.sn.mynetname.net",
+        "port": "8728",
+        "username": null,
+        "password": null
     },
     {
         "id": "386e39e445533e8d",
@@ -177,7 +187,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "60",
+        "repeat": "15",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
@@ -196,7 +206,7 @@
         "type": "debug",
         "z": "756b2f50c17bf1f1",
         "name": "payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -289,9 +299,9 @@
         "z": "756b2f50c17bf1f1",
         "name": "",
         "group": "2ce7a22209edb22c",
-        "order": 0,
-        "width": 0,
-        "height": 0,
+        "order": 5,
+        "width": "3",
+        "height": 1,
         "passthru": false,
         "label": "Query server",
         "tooltip": "",
@@ -316,12 +326,12 @@
         "z": "756b2f50c17bf1f1",
         "name": "",
         "group": "2ce7a22209edb22c",
-        "order": 1,
-        "width": 0,
-        "height": 0,
+        "order": 4,
+        "width": 4,
+        "height": "2",
         "gtype": "gage",
-        "title": "temperature",
-        "label": "units",
+        "title": "Temp Outside",
+        "label": "C",
         "format": "{{value}}",
         "min": "-10",
         "max": "40",
@@ -332,8 +342,330 @@
         ],
         "seg1": "",
         "seg2": "",
-        "x": 790,
+        "x": 800,
         "y": 120,
+        "wires": []
+    },
+    {
+        "id": "06f452c5ced95d0c",
+        "type": "ui_chart",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "group": "2ce7a22209edb22c",
+        "order": 2,
+        "width": 16,
+        "height": 4,
+        "label": "Soil moisture",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "12",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 910,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1fe1a2cbb8b890e",
+        "type": "mikrotik",
+        "z": "756b2f50c17bf1f1",
+        "device": "4e394c0747a6bf8f",
+        "name": "test",
+        "action": "0",
+        "command": "/log/print",
+        "command-type": "str",
+        "x": 350,
+        "y": 640,
+        "wires": [
+            [
+                "1edf9732bfb59bee"
+            ]
+        ]
+    },
+    {
+        "id": "bc2d1aae687e2ccc",
+        "type": "inject",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "props": [
+            {
+                "p": "command",
+                "v": "/interface print ",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 640,
+        "wires": [
+            [
+                "c1fe1a2cbb8b890e"
+            ]
+        ]
+    },
+    {
+        "id": "1edf9732bfb59bee",
+        "type": "debug",
+        "z": "756b2f50c17bf1f1",
+        "name": "Mikrotik",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "49e38bc64a2ef0ca",
+        "type": "inject",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "props": [
+            {
+                "p": "command",
+                "v": "[\"/system/health/print\"]",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 170,
+        "y": 700,
+        "wires": [
+            [
+                "c1fe1a2cbb8b890e"
+            ]
+        ]
+    },
+    {
+        "id": "1a9e5c851c52136b",
+        "type": "inject",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 580,
+        "wires": [
+            [
+                "c1fe1a2cbb8b890e"
+            ]
+        ]
+    },
+    {
+        "id": "4036e9e401eb56ee",
+        "type": "mqtt in",
+        "z": "756b2f50c17bf1f1",
+        "name": "Violetta",
+        "topic": "myhome/plant/violetta/data",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "37a6f38f31e18bdc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "e701fe210ae4d056"
+            ]
+        ]
+    },
+    {
+        "id": "e701fe210ae4d056",
+        "type": "json",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "9dd1c06a258e98bf",
+                "c266b50870f6b26a"
+            ]
+        ]
+    },
+    {
+        "id": "9dd1c06a258e98bf",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract moisture",
+        "func": "msg.payload = msg.payload.Moisture;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 380,
+        "wires": [
+            [
+                "08860c6e87ef991f"
+            ]
+        ]
+    },
+    {
+        "id": "717d19738c281c10",
+        "type": "ui_gauge",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "group": "2ce7a22209edb22c",
+        "order": 1,
+        "width": 4,
+        "height": "4",
+        "gtype": "gage",
+        "title": "Moisture",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#aa7942",
+            "#00fdff",
+            "#0433ff"
+        ],
+        "seg1": "40",
+        "seg2": "60",
+        "x": 900,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "e44d800b3002678f",
+        "type": "debug",
+        "z": "756b2f50c17bf1f1",
+        "name": "Moisture",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 900,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "08860c6e87ef991f",
+        "type": "range",
+        "z": "756b2f50c17bf1f1",
+        "minin": "1500",
+        "maxin": "3500",
+        "minout": "100",
+        "maxout": "0",
+        "action": "scale",
+        "round": true,
+        "property": "payload",
+        "name": "Moisture",
+        "x": 680,
+        "y": 380,
+        "wires": [
+            [
+                "717d19738c281c10",
+                "e44d800b3002678f",
+                "06f452c5ced95d0c"
+            ]
+        ]
+    },
+    {
+        "id": "c266b50870f6b26a",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract temperature",
+        "func": "msg.payload = msg.payload.Temperature;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 440,
+        "wires": [
+            [
+                "4fd501f0c9198fdc"
+            ]
+        ]
+    },
+    {
+        "id": "4fd501f0c9198fdc",
+        "type": "ui_gauge",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "group": "2ce7a22209edb22c",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temp Viola",
+        "label": "C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "40",
+        "colors": [
+            "#00fdff",
+            "#00f900",
+            "#ff9300"
+        ],
+        "seg1": "16",
+        "seg2": "22",
+        "x": 710,
+        "y": 440,
         "wires": []
     }
 ]
