@@ -13,8 +13,8 @@
         "cert": "",
         "key": "",
         "ca": "",
-        "certname": "aaf44340a1-certificate.pem.crt",
-        "keyname": "aaf44340a1f030806aebc82f7b9a52f191599230afde2251f0932e82b0f5d20f-private.pem.key",
+        "certname": "4ae126e7e396913298d58ea147ba5107ec4aced68dabe73444920a8e9c25c091-certificate.pem.crt",
+        "keyname": "4ae126e7e396913298d58ea147ba5107ec4aced68dabe73444920a8e9c25c091-private.pem.key",
         "caname": "AmazonRootCA1.pem",
         "servername": "",
         "verifyservercert": false,
@@ -48,6 +48,7 @@
         "willRetain": "false",
         "willPayload": "",
         "willMsg": {},
+        "userProps": "",
         "sessionExpiry": ""
     },
     {
@@ -283,7 +284,8 @@
         "y": 320,
         "wires": [
             [
-                "e701fe210ae4d056"
+                "e701fe210ae4d056",
+                "fcf1b7d5fcb7dd4f"
             ]
         ]
     },
@@ -548,5 +550,59 @@
                 "006b5b114ccf9b74"
             ]
         ]
+    },
+    {
+        "id": "fcf1b7d5fcb7dd4f",
+        "type": "debug",
+        "z": "756b2f50c17bf1f1",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b5172a2b2da1f0da",
+        "type": "mqtt in",
+        "z": "756b2f50c17bf1f1",
+        "name": "m5",
+        "topic": "myhome/plant/test/data",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "37a6f38f31e18bdc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 660,
+        "wires": [
+            [
+                "05a6837e845ad1e0"
+            ]
+        ]
+    },
+    {
+        "id": "05a6837e845ad1e0",
+        "type": "debug",
+        "z": "756b2f50c17bf1f1",
+        "name": "M5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 290,
+        "y": 660,
+        "wires": []
     }
 ]
