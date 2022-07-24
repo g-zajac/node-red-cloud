@@ -28,6 +28,7 @@
         "port": "8883",
         "tls": "35f1851ce9c8b0b7",
         "clientid": "",
+        "autoConnect": true,
         "usetls": true,
         "protocolVersion": "4",
         "keepalive": "60",
@@ -48,14 +49,6 @@
         "willPayload": "",
         "willMsg": {},
         "sessionExpiry": ""
-    },
-    {
-        "id": "82467892e58e1771",
-        "type": "ui_tab",
-        "name": "Arnold",
-        "icon": "home",
-        "disabled": false,
-        "hidden": false
     },
     {
         "id": "4eed6d9cca178cac",
@@ -156,22 +149,22 @@
         }
     },
     {
-        "id": "2ce7a22209edb22c",
-        "type": "ui_group",
+        "id": "6690499999c29bc3",
+        "type": "ui_tab",
         "name": "Home",
-        "tab": "82467892e58e1771",
-        "order": 1,
-        "disp": true,
-        "width": 20,
-        "collapse": false
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
     },
     {
-        "id": "4e394c0747a6bf8f",
-        "type": "mikrotik-device",
-        "host": "b88d0ab1c4ef.sn.mynetname.net",
-        "port": "8728",
-        "username": null,
-        "password": null
+        "id": "4c41371d40fcb2a8",
+        "type": "ui_group",
+        "name": "Home",
+        "tab": "6690499999c29bc3",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
     },
     {
         "id": "386e39e445533e8d",
@@ -217,26 +210,6 @@
         "x": 580,
         "y": 120,
         "wires": []
-    },
-    {
-        "id": "b9761a07dd185134",
-        "type": "dwdweather",
-        "z": "756b2f50c17bf1f1",
-        "name": "Berlin-Alex",
-        "mosmixStation": "10389",
-        "lookAheadHours": "12",
-        "additionalFields": "",
-        "repeat": "0",
-        "topic": "",
-        "x": 370,
-        "y": 100,
-        "wires": [
-            [
-                "c012de64ff42b43f",
-                "54a6cd00cf86a36c",
-                "006b5b114ccf9b74"
-            ]
-        ]
     },
     {
         "id": "c012de64ff42b43f",
@@ -294,6 +267,121 @@
         "wires": []
     },
     {
+        "id": "4036e9e401eb56ee",
+        "type": "mqtt in",
+        "z": "756b2f50c17bf1f1",
+        "name": "Violetta",
+        "topic": "myhome/plant/violetta/data",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "37a6f38f31e18bdc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "e701fe210ae4d056"
+            ]
+        ]
+    },
+    {
+        "id": "e701fe210ae4d056",
+        "type": "json",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 320,
+        "wires": [
+            [
+                "9dd1c06a258e98bf",
+                "c266b50870f6b26a"
+            ]
+        ]
+    },
+    {
+        "id": "9dd1c06a258e98bf",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract moisture",
+        "func": "msg.payload = msg.payload.Moisture;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 320,
+        "wires": [
+            [
+                "08860c6e87ef991f"
+            ]
+        ]
+    },
+    {
+        "id": "e44d800b3002678f",
+        "type": "debug",
+        "z": "756b2f50c17bf1f1",
+        "name": "Moisture",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 880,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "08860c6e87ef991f",
+        "type": "range",
+        "z": "756b2f50c17bf1f1",
+        "minin": "1500",
+        "maxin": "3500",
+        "minout": "100",
+        "maxout": "0",
+        "action": "scale",
+        "round": true,
+        "property": "payload",
+        "name": "Moisture",
+        "x": 660,
+        "y": 320,
+        "wires": [
+            [
+                "717d19738c281c10",
+                "e44d800b3002678f",
+                "06f452c5ced95d0c"
+            ]
+        ]
+    },
+    {
+        "id": "c266b50870f6b26a",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract temperature",
+        "func": "msg.payload = msg.payload.Temperature;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "4fd501f0c9198fdc"
+            ]
+        ]
+    },
+    {
         "id": "875773ec1747acd1",
         "type": "ui_button",
         "z": "756b2f50c17bf1f1",
@@ -325,7 +413,7 @@
         "type": "ui_gauge",
         "z": "756b2f50c17bf1f1",
         "name": "",
-        "group": "2ce7a22209edb22c",
+        "group": "4c41371d40fcb2a8",
         "order": 4,
         "width": 4,
         "height": "2",
@@ -344,6 +432,58 @@
         "seg2": "",
         "x": 800,
         "y": 120,
+        "wires": []
+    },
+    {
+        "id": "717d19738c281c10",
+        "type": "ui_gauge",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "group": "4c41371d40fcb2a8",
+        "order": 1,
+        "width": 4,
+        "height": "4",
+        "gtype": "gage",
+        "title": "Moisture",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#aa7942",
+            "#00fdff",
+            "#0433ff"
+        ],
+        "seg1": "40",
+        "seg2": "60",
+        "x": 880,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "4fd501f0c9198fdc",
+        "type": "ui_gauge",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "group": "2ce7a22209edb22c",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "Temp Viola",
+        "label": "C",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "40",
+        "colors": [
+            "#00fdff",
+            "#00f900",
+            "#ff9300"
+        ],
+        "seg1": "16",
+        "seg2": "22",
+        "x": 690,
+        "y": 380,
         "wires": []
     },
     {
@@ -383,289 +523,30 @@
         ],
         "outputs": 1,
         "useDifferentColor": false,
-        "x": 910,
-        "y": 440,
+        "x": 890,
+        "y": 380,
         "wires": [
             []
         ]
     },
     {
-        "id": "c1fe1a2cbb8b890e",
-        "type": "mikrotik",
+        "id": "b9761a07dd185134",
+        "type": "dwdweather",
         "z": "756b2f50c17bf1f1",
-        "device": "4e394c0747a6bf8f",
-        "name": "test",
-        "action": "0",
-        "command": "/log/print",
-        "command-type": "str",
-        "x": 350,
-        "y": 640,
-        "wires": [
-            [
-                "1edf9732bfb59bee"
-            ]
-        ]
-    },
-    {
-        "id": "bc2d1aae687e2ccc",
-        "type": "inject",
-        "z": "756b2f50c17bf1f1",
-        "name": "",
-        "props": [
-            {
-                "p": "command",
-                "v": "/interface print ",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
+        "name": "Berlin-Alex",
+        "mosmixStation": "10389",
+        "lookAheadHours": "12",
+        "additionalFields": "",
+        "repeat": "0",
         "topic": "",
-        "x": 170,
-        "y": 640,
+        "x": 370,
+        "y": 100,
         "wires": [
             [
-                "c1fe1a2cbb8b890e"
+                "c012de64ff42b43f",
+                "54a6cd00cf86a36c",
+                "006b5b114ccf9b74"
             ]
         ]
-    },
-    {
-        "id": "1edf9732bfb59bee",
-        "type": "debug",
-        "z": "756b2f50c17bf1f1",
-        "name": "Mikrotik",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 520,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "49e38bc64a2ef0ca",
-        "type": "inject",
-        "z": "756b2f50c17bf1f1",
-        "name": "",
-        "props": [
-            {
-                "p": "command",
-                "v": "[\"/system/health/print\"]",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 170,
-        "y": 700,
-        "wires": [
-            [
-                "c1fe1a2cbb8b890e"
-            ]
-        ]
-    },
-    {
-        "id": "1a9e5c851c52136b",
-        "type": "inject",
-        "z": "756b2f50c17bf1f1",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 180,
-        "y": 580,
-        "wires": [
-            [
-                "c1fe1a2cbb8b890e"
-            ]
-        ]
-    },
-    {
-        "id": "4036e9e401eb56ee",
-        "type": "mqtt in",
-        "z": "756b2f50c17bf1f1",
-        "name": "Violetta",
-        "topic": "myhome/plant/violetta/data",
-        "qos": "0",
-        "datatype": "auto",
-        "broker": "37a6f38f31e18bdc",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 150,
-        "y": 380,
-        "wires": [
-            [
-                "e701fe210ae4d056"
-            ]
-        ]
-    },
-    {
-        "id": "e701fe210ae4d056",
-        "type": "json",
-        "z": "756b2f50c17bf1f1",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 330,
-        "y": 380,
-        "wires": [
-            [
-                "9dd1c06a258e98bf",
-                "c266b50870f6b26a"
-            ]
-        ]
-    },
-    {
-        "id": "9dd1c06a258e98bf",
-        "type": "function",
-        "z": "756b2f50c17bf1f1",
-        "name": "extract moisture",
-        "func": "msg.payload = msg.payload.Moisture;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 380,
-        "wires": [
-            [
-                "08860c6e87ef991f"
-            ]
-        ]
-    },
-    {
-        "id": "717d19738c281c10",
-        "type": "ui_gauge",
-        "z": "756b2f50c17bf1f1",
-        "name": "",
-        "group": "2ce7a22209edb22c",
-        "order": 1,
-        "width": 4,
-        "height": "4",
-        "gtype": "gage",
-        "title": "Moisture",
-        "label": "%",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "100",
-        "colors": [
-            "#aa7942",
-            "#00fdff",
-            "#0433ff"
-        ],
-        "seg1": "40",
-        "seg2": "60",
-        "x": 900,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "e44d800b3002678f",
-        "type": "debug",
-        "z": "756b2f50c17bf1f1",
-        "name": "Moisture",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "payload",
-        "statusType": "auto",
-        "x": 900,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "08860c6e87ef991f",
-        "type": "range",
-        "z": "756b2f50c17bf1f1",
-        "minin": "1500",
-        "maxin": "3500",
-        "minout": "100",
-        "maxout": "0",
-        "action": "scale",
-        "round": true,
-        "property": "payload",
-        "name": "Moisture",
-        "x": 680,
-        "y": 380,
-        "wires": [
-            [
-                "717d19738c281c10",
-                "e44d800b3002678f",
-                "06f452c5ced95d0c"
-            ]
-        ]
-    },
-    {
-        "id": "c266b50870f6b26a",
-        "type": "function",
-        "z": "756b2f50c17bf1f1",
-        "name": "extract temperature",
-        "func": "msg.payload = msg.payload.Temperature;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 510,
-        "y": 440,
-        "wires": [
-            [
-                "4fd501f0c9198fdc"
-            ]
-        ]
-    },
-    {
-        "id": "4fd501f0c9198fdc",
-        "type": "ui_gauge",
-        "z": "756b2f50c17bf1f1",
-        "name": "",
-        "group": "2ce7a22209edb22c",
-        "order": 3,
-        "width": 4,
-        "height": 4,
-        "gtype": "gage",
-        "title": "Temp Viola",
-        "label": "C",
-        "format": "{{value}}",
-        "min": "10",
-        "max": "40",
-        "colors": [
-            "#00fdff",
-            "#00f900",
-            "#ff9300"
-        ],
-        "seg1": "16",
-        "seg2": "22",
-        "x": 710,
-        "y": 440,
-        "wires": []
     }
 ]
