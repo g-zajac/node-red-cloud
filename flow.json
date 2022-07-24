@@ -7,6 +7,20 @@
         "info": ""
     },
     {
+        "id": "5037c5203bfe06b3",
+        "type": "junction",
+        "z": "756b2f50c17bf1f1",
+        "x": 240,
+        "y": 660,
+        "wires": [
+            [
+                "75d10b7bcaccf180",
+                "804cb6d024125fc4",
+                "487c4fddd90876f0"
+            ]
+        ]
+    },
+    {
         "id": "35f1851ce9c8b0b7",
         "type": "tls-config",
         "name": "AWS-certificates",
@@ -555,12 +569,13 @@
         "id": "fcf1b7d5fcb7dd4f",
         "type": "debug",
         "z": "756b2f50c17bf1f1",
-        "name": "debug 1",
+        "name": "Violetta",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
         "x": 320,
@@ -584,7 +599,8 @@
         "y": 660,
         "wires": [
             [
-                "05a6837e845ad1e0"
+                "05a6837e845ad1e0",
+                "5037c5203bfe06b3"
             ]
         ]
     },
@@ -601,8 +617,123 @@
         "targetType": "msg",
         "statusVal": "payload",
         "statusType": "auto",
-        "x": 290,
+        "x": 370,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "487c4fddd90876f0",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract battery",
+        "func": "msg.payload = msg.payload.battery;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 620,
+        "wires": [
+            [
+                "7022d700361d43ee"
+            ]
+        ]
+    },
+    {
+        "id": "7022d700361d43ee",
+        "type": "ui_gauge",
+        "z": "756b2f50c17bf1f1",
+        "name": "",
+        "group": "4c41371d40fcb2a8",
+        "order": 3,
+        "width": 4,
+        "height": 4,
+        "gtype": "gage",
+        "title": "M5 battery",
+        "label": "C",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#ff2600",
+            "#ff9300",
+            "#00f900"
+        ],
+        "seg1": "16",
+        "seg2": "22",
+        "x": 610,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "75d10b7bcaccf180",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract counter",
+        "func": "msg.payload = msg.payload.counter;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
         "y": 660,
+        "wires": [
+            [
+                "a0b08f596c4aecaa"
+            ]
+        ]
+    },
+    {
+        "id": "a0b08f596c4aecaa",
+        "type": "ui_text",
+        "z": "756b2f50c17bf1f1",
+        "group": "4c41371d40fcb2a8",
+        "order": 3,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "counter",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "804cb6d024125fc4",
+        "type": "function",
+        "z": "756b2f50c17bf1f1",
+        "name": "extract firmware",
+        "func": "msg.payload = msg.payload.firmware;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 700,
+        "wires": [
+            [
+                "bfc893970fb74578"
+            ]
+        ]
+    },
+    {
+        "id": "bfc893970fb74578",
+        "type": "ui_text",
+        "z": "756b2f50c17bf1f1",
+        "group": "4c41371d40fcb2a8",
+        "order": 3,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "firmware",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 600,
+        "y": 700,
         "wires": []
     }
 ]
